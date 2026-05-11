@@ -1,21 +1,20 @@
-# Enterprise GenAI RAG Pipeline 🧠⚙️
+# Enterprise GenAI RAG Pipeline
 
-### 🚀 Overview
-An enterprise-grade **Retrieval-Augmented Generation (RAG)** pipeline designed to provide LLMs with dynamic, real-time contextual awareness from vast document stores. Built for high concurrency and extremely low-latency inference.
+An enterprise-grade, asynchronous AI-powered document screening and ranking system. This backend architecture utilizes **FastAPI**, **Retrieval-Augmented Generation (RAG)** paradigms, and advanced NLP techniques to parse textual data and calculate intelligent relevance scores.
 
-### 🏗️ Architecture & Features
-- **Asynchronous Data Ingestion:** Handles massive parallel document processing.
-- **Deep Chunking & Embedding:** Custom heuristic-based semantic chunking before passing data to transformer models.
-- **Vector Database Abstraction:** Production-ready connectors for scalable similarity search.
-- **LLM Orchestrator:** Dynamic prompt templating and routing logic to prevent token overflows and hallucination.
-- **Robustness:** Built-in error handling, automatic failovers, and comprehensive unit tests (1000+ assertions).
+## 🚀 Architecture Overview
+- **Backend API:** High-performance RESTful API built with `FastAPI` and structured `Pydantic` models.
+- **LLM Orchestration:** Automated prompt chaining utilizing OpenAI/Gemini models for complex data extraction.
+- **Vector Search:** Integration ready for Vector Databases (ChromaDB/Pinecone) using 1024-dimensional embeddings (`torch` & `transformers`).
+- **Data Validation:** Strict type checking and validation for LLM outputs.
 
-### 💻 Tech Stack
-- **Languages/Frameworks:** Python 3.10+, FastAPI, LangChain, SQLAlchemy
-- **AI/ML:** PyTorch, HuggingFace Transformers, OpenAI/Local LLMs
-- **Testing:** Python `unittest`, Pytest
-
-### 📁 Repository Contents
-- `main.py`: The entry-point API wrapper for the GenAI system.
-- `Project_3_Enterprise_AI_Pipeline_Source_Code.pdf`: The complete, 9000+ line compiled source code including all modules, vector math heuristics, and exhaustive unit tests (For review purposes).# Enterprise-GenAI-RAG-Pipeline
-Developed a sophisticated, production-ready AI pipeline that enhances Large Language Models (LLMs) with private, real-time data using Retrieval-Augmented Generation (RAG). This system solves the problem of 'AI hallucinations' by providing a dedicated context from massive document stores, allowing for hyper-accurate, domain-specific responses.
+## 📂 Project Structure
+```text
+Enterprise-GenAI-RAG-Pipeline/
+│
+├── app/
+│   ├── main.py            # FastAPI Application & Endpoints
+│   └── rag_engine.py      # Core LLM Chaining & Embedding Logic
+│
+├── requirements.txt       # Project dependencies
+└── README.md              # Project documentation
