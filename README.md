@@ -1,4 +1,4 @@
-Enterprise GenAI RAG Pipeline
+# Enterprise GenAI RAG Pipeline
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.103-009688)
@@ -13,11 +13,11 @@ An enterprise-grade AI-powered document screening system utilizing FastAPI, RAG 
 ```mermaid
 graph TD
     A[Client Request] --> B[FastAPI Backend]
-    B --> C[RAG Engine Orchestrator]
-    C --> D[Embeddings Generator]
-    C --> E[Vector Store - ChromaDB]
+    B --> C[RAG Engine]
+    C --> D[Embeddings]
+    C --> E[Vector DB]
     E --> C
-    C --> F[LLM API - OpenAI/Gemini]
+    C --> F[LLM API]
     F --> B
     B --> G[JSON Response]
 Key Features and Tech Stack
@@ -39,7 +39,7 @@ Setup and Installation
 Clone and Install
 
 Bash
-git clone https://github.com/kingryukendo/Enterprise-GenAI-RAG-Pipeline.git
+git clone [https://github.com/kingryukendo/Enterprise-GenAI-RAG-Pipeline.git](https://github.com/kingryukendo/Enterprise-GenAI-RAG-Pipeline.git)
 pip install -r requirements.txt
 Run the Server
 
@@ -47,7 +47,7 @@ Bash
 uvicorn app.main:app --reload
 API Documentation
 POST /api/v1/query
-Request Body Example:
+Example Request:
 
 JSON
 {
