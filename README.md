@@ -1,4 +1,4 @@
-# 🚀 Enterprise GenAI RAG Pipeline
+# Enterprise GenAI RAG Pipeline
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.103-009688)
@@ -8,23 +8,18 @@ An enterprise-grade AI-powered document screening system utilizing **FastAPI**, 
 
 ---
 
-## 🏗️ Architecture Diagram
+## Architecture Diagram
 
 ```mermaid
 graph TD
-    A[Client Request] -->|POST /api/v1/query| B(FastAPI Backend)
-    B --> C{RAG Engine Orchestrator}
-    C -->|1. Generate Embeddings| D[Torch / Transformers]
-    C -->|2. Semantic Search| E[(ChromaDB / Vector Store)]
-    E -->|3. Retrieved Context| C
-    C -->|4. Prompt Chaining| F[OpenAI / Gemini LLM API]
-    F -->|5. Analyzed Output| B
-    B -->|JSON Response| A
-    
-    style B fill:#009688,stroke:#fff,stroke-width:2px,color:#fff
-    style C fill:#f39c12,stroke:#fff,stroke-width:2px,color:#fff
-    style E fill:#3498db,stroke:#fff,stroke-width:2px,color:#fff
-    style F fill:#9b59b6,stroke:#fff,stroke-width:2px,color:#fff
+    A[Client Request] --> B[FastAPI Backend]
+    B --> C[RAG Engine Orchestrator]
+    C --> D[Embeddings Generator]
+    C --> E[Vector Store - ChromaDB]
+    E --> C
+    C --> F[LLM API - OpenAI/Gemini]
+    F --> B
+    B --> G[JSON Response]
 
 
 
