@@ -1,0 +1,24 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+env/
+
+# Environment Variables (Security first!)
+.env
+
+# Vector Database Storage (ChromaDB / FAISS)
+chroma_db/
+vector_store/
+*.sqlite3
+*.db
+
+# Logs
+*.log
+
+# OS / IDE files
+.DS_Store
+.vscode/
