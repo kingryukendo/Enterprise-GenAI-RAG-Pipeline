@@ -3,9 +3,8 @@
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.103-009688)
 ![LLM](https://img.shields.io/badge/LLM-OpenAI%20%7C%20Gemini-orange)
-![Status](https://img.shields.io/badge/Status-Active-success)
 
-An enterprise-grade, asynchronous AI-powered document screening and ranking system. This backend architecture utilizes **FastAPI**, **Retrieval-Augmented Generation (RAG)** paradigms, and advanced NLP techniques to parse textual data and calculate intelligent relevance scores.
+An enterprise-grade AI-powered document screening system utilizing **FastAPI**, **RAG** paradigms, and advanced NLP.
 
 ---
 
@@ -26,6 +25,7 @@ graph TD
     style C fill:#f39c12,stroke:#fff,stroke-width:2px,color:#fff
     style E fill:#3498db,stroke:#fff,stroke-width:2px,color:#fff
     style F fill:#9b59b6,stroke:#fff,stroke-width:2px,color:#fff
+
 ✨ Key Features & Tech Stack
 Features
 Asynchronous Processing: Built with asyncio to handle concurrent LLM API calls without blocking.
