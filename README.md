@@ -1,10 +1,10 @@
-# Enterprise GenAI RAG Pipeline
+Enterprise GenAI RAG Pipeline
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.103-009688)
 ![LLM](https://img.shields.io/badge/LLM-OpenAI%20%7C%20Gemini-orange)
 
-An enterprise-grade AI-powered document screening system utilizing **FastAPI**, **RAG** paradigms, and advanced NLP.
+An enterprise-grade AI-powered document screening system utilizing FastAPI, RAG paradigms, and advanced NLP.
 
 ---
 
@@ -20,85 +20,42 @@ graph TD
     C --> F[LLM API - OpenAI/Gemini]
     F --> B
     B --> G[JSON Response]
-
-
-
-✨ Key Features & Tech Stack
-
+Key Features and Tech Stack
 Features
-Asynchronous Processing: Built with asyncio to handle concurrent LLM API calls without blocking.
+Asynchronous Processing: Built with asyncio for non-blocking LLM API calls.
 
-Dynamic Prompt Engineering: Multi-stage prompts optimized for extracting technical skills and scoring them against job requirements.
+Dynamic Prompt Engineering: Optimized for high-accuracy technical skill extraction.
 
-Vector Search Integration: Supports high-dimensional (1024) vector embeddings for accurate semantic retrieval.
-
-Robust Validation: Strict input/output validation using Pydantic models.
+Vector Search Integration: Supports 1024-dimensional embeddings for semantic retrieval.
 
 Tech Stack
-Core: Python 3.10+, FastAPI, Pydantic, Uvicorn
+Core: Python 3.10+, FastAPI, Pydantic
 
-AI/ML: OpenAI API, Google Gemini, LangChain
+AI/ML: OpenAI API, Gemini, LangChain, PyTorch
 
-Embeddings & NLP: PyTorch, HuggingFace Transformers
+Database: ChromaDB (Vector Search)
 
-Database: ChromaDB (Vector Search), SQLAlchemy (Metadata)
-
-Data Handling: NumPy, Pandas
-
-🛠️ Setup & Installation Instructions
-1. Clone the repository
+Setup and Installation
+Clone and Install
 
 Bash
-git clone [https://github.com/kingryukendo/Enterprise-GenAI-RAG-Pipeline.git](https://github.com/kingryukendo/Enterprise-GenAI-RAG-Pipeline.git)
-cd Enterprise-GenAI-RAG-Pipeline
-2. Create a Virtual Environment
-
-Bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-3. Install Dependencies
-
-Bash
+git clone https://github.com/kingryukendo/Enterprise-GenAI-RAG-Pipeline.git
 pip install -r requirements.txt
-4. Configure Environment Variables
-Create a .env file in the root directory:
-
-Code snippet
-OPENAI_API_KEY=your_openai_api_key
-GEMINI_API_KEY=your_gemini_api_key
-VECTOR_DB_PATH=./data/chroma_db
-5. Run the Server
+Run the Server
 
 Bash
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-📖 API Documentation
-Access the interactive Swagger UI at http://localhost:8000/docs.
-
+uvicorn app.main:app --reload
+API Documentation
 POST /api/v1/query
-Processes a document against a user query using the RAG pipeline.
-
-Request Body (JSON):
+Request Body Example:
 
 JSON
 {
   "document_id": "doc_98765",
-  "user_query": "Extract top backend and AI skills from this candidate's profile.",
+  "user_query": "Extract backend skills.",
   "relevance_threshold": 0.85
 }
-Success Response (200 OK):
+Future Roadmap
+RLHF Integration: Reinforcement Learning from Human Feedback.
 
-JSON
-{
-  "status": "success",
-  "extracted_skills": ["Python", "FastAPI", "Generative AI", "RAG"],
-  "confidence_score": 0.92,
-  "llm_response": "Based on the context, the primary skills are strongly aligned with backend AI architecture. Relevant Context found in sections..."
-}
-🗺️ Future Roadmap
-[ ] RLHF Integration: Implement Reinforcement Learning from Human Feedback to improve scoring accuracy.
-
-[ ] Multi-Modal RAG: Add support for parsing images and charts within PDF documents.
-
-[ ] CI/CD Pipeline: Automate testing and deployment using GitHub Actions and Docker.
-
-[ ] Agentic Workflows: Upgrade from simple chaining to autonomous LangGraph/AutoGen agents.
+Agentic Workflows: Autonomous LangGraph agents.
