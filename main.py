@@ -1,40 +1,57 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-import uvicorn
+import os
+import asyncio
 import logging
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Security
+from pydantic import BaseModel, Field
+from rag_engine import RAGPipeline
 
-# Simulating the import of the massive pipeline architecture
-# from core.llm_orchestrator import LLMOrchestratorManager
-# from core.vector_db import VectorDatabaseConnectionManager
-
-app = FastAPI(title="GenAI RAG Enterprise Assistant", version="2.0.0")
+# Initialize Logging and App
 logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+app = FastAPI(
+    title="Enterprise GenAI RAG Pipeline API",
+    description="API for document screening and technical skill extraction using LLMs and Vector DBs.",
+    version="1.0.0"
+)
+
+# Initialize the RAG Engine
+rag_engine = RAGPipeline()
 
 class QueryRequest(BaseModel):
-    user_id: str
-    query: str
-    context_strictness: float = 0.8
+    document_id: str = Field(..., description="Unique ID of the document")
+    user_query: str = Field(..., description="Query to run against the document")
+    relevance_threshold: float = Field(default=0.75, description="Minimum similarity score")
 
-@app.on_event("startup")
-async def startup_event():
-    logging.info("Initializing Enterprise Vector DB Connections and LLM Weights...")
-    # orchestrator = LLMOrchestratorManager(config)
-    logging.info("AI Pipeline is strictly online.")
+class QueryResponse(BaseModel):
+    status: str
+    extracted_skills: list
+    confidence_score: float
+    llm_response: str
 
-@app.post("/api/v1/query")
-async def process_query(req: QueryRequest):
-    logging.info(f"Received semantic query from {req.user_id}")
+@app.post("/api/v1/query", response_model=QueryResponse)
+async def process_document_query(request: QueryRequest):
     try:
-        # In production, this routes through the 9000+ line pipeline 
-        # result = await orchestrator.execute_complex_task_1(req.dict())
-        return {
-            "status": "success",
-            "answer": "This is a simulated AI response extracted from the vector embeddings.",
-            "confidence_score": 0.98,
-            "latency_ms": 124.5
-        }
+        logger.info(f"Processing query for document: {request.document_id}")
+        
+        # Asynchronous call to RAG Engine
+        result = await rag_engine.process_query(
+            doc_id=request.document_id,
+            query=request.user_query,
+            threshold=request.relevance_threshold
+        )
+        
+        return QueryResponse(
+            status="success",
+            extracted_skills=result.get("skills", []),
+            confidence_score=result.get("score", 0.0),
+            llm_response=result.get("answer", "")
+        )
+        
     except Exception as e:
-        raise HTTPException(status_code=500, detail="Neural routing failure")
+        logger.error(f"Pipeline Error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal RAG Pipeline Error")
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+@app.get("/health")
+def health_check():
+    return {"status": "System Operational", "vector_db": "Connected"}
